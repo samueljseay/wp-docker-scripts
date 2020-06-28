@@ -1,0 +1,52 @@
+version: "3.1"
+
+services:
+  wordpress:
+    image: wordpress:latest
+    restart: always
+    ports:
+      - 1234:80
+    environment:
+      WORDPRESS_DB_HOST: db
+      WORDPRESS_DB_USER: root
+      WORDPRESS_DB_PASSWORD: root
+      WORDPRESS_DB_NAME: wp_db
+    volumes:
+      - wp_data:/var/www/html
+    depends_on:
+      - db
+
+  db:
+    image: mysql:5.7.29
+    restart: always
+    environment:
+      MYSQL_DATABASE: wp_db
+      MYSQL_USER: user
+      MYSQL_PASSWORD: password
+      MYSQL_ROOT_PASSWORD: root
+    volumes:
+      - db:/var/lib/mysql
+  wordpress-cli:
+    depends_on:
+      - db
+      - wordpress
+    image: wordpress:cli
+    # vstm: This is required to run wordpress-cli with the same
+    # user-id as wordpress. This way there are no permission problems
+    # when running the cli
+    user: xfs
+    # vstm: The sleep 10 is required so that the command is run after
+    # mysql is initialized. Depending on your machine this might take
+    # longer or it can go faster.
+    command: >
+      /bin/sh -c '
+      sleep 10;
+      wp core install --path="/var/www/html" --url="http://localhost:1234" --title="WooCommerce Dev" --admin_user=admin --admin_password=password --admin_email=admin@example.com
+      '
+    # vstm: add shared volume
+    volumes:
+      - wp_data:/var/www/html
+
+volumes:
+  db:
+  wp_data:

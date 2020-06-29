@@ -13,9 +13,11 @@ services:
       WORDPRESS_DB_NAME: wp_db
     volumes:
       - type: bind
-        # Mount code directory containing all plugins
-        source: /Users/samseay/Code/automattic
-        target: /var/www/html/wp-content/plugins
+        source: /Users/samseay/Code/automattic/woocommerce
+        target: /var/www/html/wp-content/plugins/woocommerce
+      - type: bind
+        source: /Users/samseay/Code/automattic/woocommerce-admin
+        target: /var/www/html/wp-content/plugins/woocommerce-admin
       - type: volume
         source: wp_data
         target: /var/www/html
@@ -25,6 +27,8 @@ services:
   db:
     image: mysql:5.7.29
     restart: always
+    ports:
+      - 3306:3306
     environment:
       MYSQL_DATABASE: wp_db
       MYSQL_USER: user
@@ -42,7 +46,7 @@ services:
     command: >
       /bin/sh -c '
       sleep 10;
-      wp core install --path="/var/www/html" --url="http://localhost:1234" --title="WooCommerce Dev" --admin_user=admin --admin_password=password --admin_email=admin@example.com
+      wp core install --path="/var/www/html" --url="http://docker.for.mac.localhost:1234" --title="WooCommerce Dev" --admin_user=admin --admin_password=password --admin_email=admin@example.com
       '
     volumes:
       - wp_data:/var/www/html

@@ -21,6 +21,9 @@ services:
       - type: bind
         source: /Users/samseay/Code/automattic/wc-calypso-bridge
         target: /var/www/html/wp-content/plugins/wc-calypso-bridge
+      - type: bind
+        source: /Users/samseay/Code/automattic/calypso-bridge-helper
+        target: /var/www/html/wp-content/plugins/calypso-bridge-helper
       - type: volume
         source: wp_data
         target: /var/www/html

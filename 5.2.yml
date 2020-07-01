@@ -18,6 +18,9 @@ services:
       - type: bind
         source: /Users/samseay/Code/automattic/woocommerce-admin
         target: /var/www/html/wp-content/plugins/woocommerce-admin
+      - type: bind
+        source: /Users/samseay/Code/automattic/wc-calypso-bridge
+        target: /var/www/html/wp-content/plugins/wc-calypso-bridge
       - type: volume
         source: wp_data
         target: /var/www/html
@@ -45,8 +48,10 @@ services:
     user: xfs
     command: >
       /bin/sh -c '
-      sleep 10;
-      wp core install --path="/var/www/html" --url="http://docker.for.mac.localhost:1234" --title="WooCommerce Dev" --admin_user=admin --admin_password=password --admin_email=admin@example.com
+      sleep 20;
+      wp core install --path="/var/www/html" --url="http://docker.for.mac.localhost:1234" --title="WooCommerce Dev" --admin_user=admin --admin_password=password --admin_email=admin@example.com;
+      wp plugin install jetpack;
+      wp plugin activate --all;
       '
     volumes:
       - wp_data:/var/www/html

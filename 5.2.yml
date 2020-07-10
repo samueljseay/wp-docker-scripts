@@ -18,12 +18,12 @@ services:
       - type: bind
         source: /Users/samseay/Code/automattic/woocommerce-admin
         target: /var/www/html/wp-content/plugins/woocommerce-admin
-      - type: bind
-        source: /Users/samseay/Code/automattic/wc-calypso-bridge
-        target: /var/www/html/wp-content/plugins/wc-calypso-bridge
-      - type: bind
-        source: /Users/samseay/Code/automattic/calypso-bridge-helper
-        target: /var/www/html/wp-content/plugins/calypso-bridge-helper
+      # - type: bind
+      #   source: /Users/samseay/Code/automattic/wc-calypso-bridge
+      #   target: /var/www/html/wp-content/plugins/wc-calypso-bridge
+      # - type: bind
+      #   source: /Users/samseay/Code/automattic/calypso-bridge-helper
+      #   target: /var/www/html/wp-content/plugins/calypso-bridge-helper
       - type: volume
         source: wp_data
         target: /var/www/html
@@ -55,6 +55,9 @@ services:
       wp core install --path="/var/www/html" --url="http://docker.for.mac.localhost:1234" --title="WooCommerce Dev" --admin_user=admin --admin_password=password --admin_email=admin@example.com;
       wp plugin install jetpack;
       wp plugin activate --all;
+      wp config set SCRIPT_DEBUG true --raw;
+      wp config set WP_DEBUG true --raw;
+      wp config set WP_DEBUG_LOG true --raw;
       '
     volumes:
       - wp_data:/var/www/html

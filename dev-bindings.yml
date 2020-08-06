@@ -18,12 +18,6 @@ services:
       - type: bind
         source: /Users/samseay/Code/automattic/woocommerce-admin
         target: /var/www/html/wp-content/plugins/woocommerce-admin
-      # - type: bind
-      #   source: /Users/samseay/Code/automattic/wc-calypso-bridge
-      #   target: /var/www/html/wp-content/plugins/wc-calypso-bridge
-      # - type: bind
-      #   source: /Users/samseay/Code/automattic/calypso-bridge-helper
-      #   target: /var/www/html/wp-content/plugins/calypso-bridge-helper
       - type: volume
         source: wp_data
         target: /var/www/html
@@ -53,12 +47,13 @@ services:
       /bin/sh -c '
       sleep 20;
       wp core install --path="/var/www/html" --url="http://localhost:1234" --title="WooCommerce Dev" --admin_user=admin --admin_password=password --admin_email=admin@example.com;
-      wp plugin install jetpack;
-      wp plugin activate --all;
-      wp config set SCRIPT_DEBUG true --raw;
-      wp config set WP_DEBUG true --raw;
-      wp config set WP_DEBUG_LOG true --raw;
-      wp config set WP_DEBUG_DISPLAY false --raw;
+      wp plugin install jetpack;      
+      wp config set JETPACK_AUTOLOAD_DEV true --raw --debug=bootstrap;
+      # Note - SCRIPT_DEBUG being off means it will serve minified scripts
+      wp config set SCRIPT_DEBUG false --raw --debug=bootstrap;
+      wp config set WP_DEBUG true --raw --debug=bootstrap;
+      wp config set WP_DEBUG_LOG true --raw --debug=bootstrap;
+      wp config set WP_DEBUG_DISPLAY false --raw --debug=bootstrap;
       '
     volumes:
       - wp_data:/var/www/html

@@ -1,3 +1,3 @@
 #!/bin/bash
 
-docker-compose -f 5.2.yml up --build
+docker-compose -f dev-bindings.yml up --build

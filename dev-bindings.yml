@@ -3,7 +3,7 @@ version: "3.8"
 services:
   wordpress:
     container_name: "${CONTAINER_NAME_PREFIX}_wordpress"
-    image: wordpress:latest
+    image: wordpress_debug:latest
     restart: always
     ports:
       - 1234:80

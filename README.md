@@ -34,7 +34,8 @@ configure if needed. By default the Wordpress instance runs on `localhost:1234`.
 
 ### Teardown
 
-To clear out all cached images, volumes, containers etc, run `./bin/clean.sh`
+To clear out all cached images, volumes, containers etc, run `./bin/clean.sh`. **Warning** this is a system wide
+clean and will clear out **all** the Docker things.
 
 ### XDebug
 

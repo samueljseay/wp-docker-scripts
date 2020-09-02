@@ -16,7 +16,6 @@ services:
       - type: bind
         source: "${PLUGIN_DEV_DIRECTORY}"
         target: /var/www/html/wp-content/plugins
-        read_only: true
       - type: volume
         source: wp_data
         target: /var/www/html

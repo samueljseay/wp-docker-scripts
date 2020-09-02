@@ -73,5 +73,7 @@ If you use the VSCode PHP Debug extension here is a config that works with the d
 
 ### Limitations
 
-Currently wp-cli won't activate plugins mounted in your volume so you'll need to do that manually, I don't have a solution
-for this yet.
+1. Currently wp-cli won't activate plugins mounted in your volume so you'll need to do that manually, I don't have a solution
+   for this yet.
+
+2. The way `PLUGIN_DEV_DIRECTORY` is mounted means that installed plugins on Docker will turn up in your dev directory. I'm working on a way to improve this.

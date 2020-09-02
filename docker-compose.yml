@@ -44,7 +44,7 @@ services:
       - wordpress
     image: wordpress_installer:latest
     environment:
-      WP_HOST_NAME: "${WP_HOST_NAME}"
+      WP_HOST_NAME: "${WP_HOST_NAME}:${WP_PORT}"
     user: xfs
     command: /usr/local/bin/install-wp.sh
     volumes:

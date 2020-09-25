@@ -1,5 +1,12 @@
 FROM wordpress:latest as wordpress_debug
 
+RUN echo "file_uploads = On\n" \
+  "memory_limit = 500M\n" \
+  "upload_max_filesize = 500M\n" \
+  "post_max_size = 500M\n" \
+  "max_execution_time = 600\n" \
+  > /usr/local/etc/php/conf.d/uploads.ini
+
 # uncomment this and run `bin/reset.sh && bin/start.sh` to rebuild with xdebug support
 # RUN pecl install xdebug \
 #   && echo 'xdebug.remote_enable=1' >> $PHP_INI_DIR/php.ini \

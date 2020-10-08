@@ -1,2 +1,2 @@
 #!/bin/bash
-docker-compose rm -f -s -v
+docker-compose -f ./dynamic-compose.yml rm -f -s -v

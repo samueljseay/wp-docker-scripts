@@ -1,8 +1,10 @@
 module.exports = {
   mappings: {
+    // example
     "wp-content/plugins/woocommerce-admin":
-      "/Users/samseay/Code/automattic/woocommerce-admin",
-    "wp-content/plugins/woocommerce":
-      "/Users/samseay/Code/automattic/woocommerce",
+      "path/to/your/local/clone/of/woocommerce-admin",
   },
+  CONTAINER_NAME_PREFIX: "wp_dev",
+  WP_HOST_NAME: "http://docker.for.mac.localhost",
+  WP_PORT: 1234,
 };

@@ -21,7 +21,7 @@ const generateConfig = () => {
         container_name: `${config.CONTAINER_NAME_PREFIX}_wordpress`,
         image: "wordpress_debug:latest",
         restart: "always",
-        ports: ["${WP_PORT}:80"],
+        ports: [`${config.WP_PORT}:80`],
         environment: {
           WORDPRESS_DB_HOST: "db",
           WORDPRESS_DB_USER: "root",
@@ -80,7 +80,7 @@ const getConfig = () => {
   return {
     CONTAINER_NAME_PREFIX: "wp_dev",
     WP_HOST_NAME: "http://docker.for.mac.localhost",
-    WP_PORT: "1234",
+    WP_PORT: 1234,
     ...config,
   };
 };

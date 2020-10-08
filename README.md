@@ -68,6 +68,10 @@ If you use the VSCode PHP Debug extension here is a config that works with the d
 }
 ```
 
+### Access inside the container
+
+An npm script allows you to get access to the main Wordpress instance container. run `npm run enter`.
+
 ### TODO
 
 1. Add support for plugin installation/activation via config.js. (coming soon)

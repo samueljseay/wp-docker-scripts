@@ -4,7 +4,7 @@
   "description": "A customisable Docker environment",
   "main": "make-compose.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "enter": "node ./enter-container.js"
   },
   "repository": {
     "type": "git",

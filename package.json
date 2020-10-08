@@ -1,0 +1,22 @@
+{
+  "name": "docker-wp",
+  "version": "0.0.1",
+  "description": "A customisable Docker environment",
+  "main": "make-compose.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/samueljseay/wp-docker-scripts.git"
+  },
+  "author": "Sam Seay",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/samueljseay/wp-docker-scripts/issues"
+  },
+  "homepage": "https://github.com/samueljseay/wp-docker-scripts#readme",
+  "dependencies": {
+    "js-yaml": "^3.14.0"
+  }
+}

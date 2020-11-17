@@ -4,7 +4,8 @@
   "description": "A customisable Docker environment",
   "main": "make-compose.js",
   "scripts": {
-    "enter": "node ./enter-container.js"
+    "enter": "node ./enter-container.js",
+    "reset": "./bin/reset.sh && ./bin/purge.sh && ./bin/start.sh"
   },
   "repository": {
     "type": "git",

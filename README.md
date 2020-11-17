@@ -27,12 +27,9 @@ local directories as `bind` volumes in the dynamically generated docker compose 
 
 TODO - more documentation here.
 
-### Teardown
+### Hard Reset
 
-Basic teardown can be done via `./bin/reset.sh`.
-
-To clear out **all** cached images, volumes, containers etc, run `./bin/purge.sh`. **Warning** this is a system wide
-clean and will clear out **all** the Docker things.
+To clear out **all** cached images, volumes, containers etc, and restart, run `npm run reset`. **Warning** this is a system wide clean and will clear out **all** the Docker things.
 
 ### XDebug
 

@@ -7,4 +7,3 @@ wp config set WP_DEBUG true --raw --debug=bootstrap;
 wp config set SCRIPT_DEBUG true --raw --debug=bootstrap;
 wp config set WP_DEBUG_LOG true --raw --debug=bootstrap;
 wp config set WP_DEBUG_DISPLAY false --raw --debug=bootstrap;
-wp plugin install jetpack;

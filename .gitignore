@@ -1,2 +1,3 @@
 node_modules
 dynamic-compose.yml
+docker/wp-install-dynamic.sh

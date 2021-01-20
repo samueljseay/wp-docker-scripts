@@ -12,7 +12,7 @@ RUN set -ex; \
   chmod +x wp-cli.phar; \
   mv wp-cli.phar /usr/local/bin/wp;
 
-# uncomment this and run `bin/reset.sh && bin/start.sh` to rebuild with xdebug support
+# uncomment the lines below and run `bin/reset.sh && bin/start.sh` to rebuild with xdebug support
 # RUN pecl install xdebug \
 #   && echo 'xdebug.remote_enable=1' >> $PHP_INI_DIR/php.ini \
 #   && echo 'xdebug.remote_port=9000' >> $PHP_INI_DIR/php.ini \

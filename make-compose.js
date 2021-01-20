@@ -1,5 +1,8 @@
 const yaml = require("js-yaml");
 const fs = require("fs");
+const generateInstallScript = require("./make-install");
+
+const INSTALL_SCRIPT_FILENAME = "wp-install-dynamic.sh";
 
 const generateConfig = () => {
   const config = getConfig();
@@ -59,7 +62,7 @@ const generateConfig = () => {
           WP_HOST_NAME: `${config.WP_HOST_NAME}:${config.WP_PORT}`,
         },
         user: "xfs",
-        command: "/usr/local/bin/install-wp.sh",
+        command: `/usr/local/bin/${INSTALL_SCRIPT_FILENAME}`,
         volumes: ["wp_data:/var/www/html"],
       },
     },
@@ -90,10 +93,26 @@ const generateYamlConfig = () => {
 };
 
 const generateCompose = () => {
+  // generate the dynamic install script
+  generateInstall();
+
   fs.writeFileSync("dynamic-compose.yml", generateYamlConfig(), {
     encoding: "utf8",
     flag: "w",
   });
+};
+
+const generateInstall = () => {
+  fs.writeFileSync(
+    `docker/${INSTALL_SCRIPT_FILENAME}`,
+    generateInstallScript(getConfig()),
+    {
+      encoding: "utf8",
+      flag: "w",
+    }
+  );
+
+  fs.chmodSync(`docker/${INSTALL_SCRIPT_FILENAME}`, "755");
 };
 
 generateCompose();

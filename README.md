@@ -10,15 +10,19 @@ more functionality later you should be able to customise this setup fairly easil
 1. [Install Docker](https://docs.docker.com/docker-for-mac/install/)
 2. Install Node.js
 3. `npm install`
-4. Configure `config.js` with your desired mappings (see the file for examples)
+4. Configure `config.js` with your desired mappings, config and plugins to install (see the file for examples)
 5. run `./bin/start.sh`, this should start a Wordpress environment running
    at the host and port specified in `config.js`
 
-If you used the defaults you should now have a wordpress install available at `http://localhost:1234`. The
-admin username is `admin` with password `password`.
+If you used the defaults you should now have a wordpress install available at `http://localhost:1234`. The admin username is `admin` with password `password`.
 
 If you would like to connect to the DB it is exposed on port 3306, so you can
 connect to it as normal with your DB management tool of choice.
+
+### Enter the container
+
+If you want run commands inside the container you'll find it has wp-cli available.
+To enter the container run `npm run enter`.
 
 ### config.js setup
 
@@ -69,9 +73,11 @@ If you use the VSCode PHP Debug extension here is a config that works with the d
 
 An npm script allows you to get access to the main Wordpress instance container. run `npm run enter`.
 
-### TODO
+### Limitations
 
-1. Add support for plugin installation/activation via config.js. (coming soon)
+1. For some reason, wp cli can still not see plugins that have been mounted from local directories, so automatically activating these does not work right now. I'm still trying to investigate a workaround for this.
+
+2. wp-cli must be run with `--allow-root` when inside the container right now. I'm exploring some solutions to this.
 
 ### Why not just use @wordpress/env
 

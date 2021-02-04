@@ -41,8 +41,7 @@ XDebug support is disabled by default because it does slow down the environment
 significantly. If you'd like to enable it, just uncomment the Xdebug enable code
 in `docker/wordpress/Dockerfile` then run:
 
-`./bin/reset.sh`
-`./bin/start.sh`
+`npm run reset`
 
 If you use the VSCode PHP Debug extension here is a config that works with the default settings of this project:
 
@@ -75,7 +74,8 @@ An npm script allows you to get access to the main Wordpress instance container.
 
 ### Limitations
 
-1. For some reason, wp cli can still not see plugins that have been mounted from local directories, so automatically activating these does not work right now. I'm still trying to investigate a workaround for this.
+1. For some reason, wp cli not see plugins that have been bind mounted into wp-content/plugins, so activation of local
+   plugins does not work right now.
 
 2. wp-cli must be run with `--allow-root` when inside the container right now. I'm exploring some solutions to this.
 

@@ -8,6 +8,7 @@ const generateInstallScript = ({
 sleep 20;
 wp core install --path="/var/www/html" --url="$WP_HOST_NAME:$WP_PORT" --title="WooCommerce Dev" --admin_user=admin --admin_password=password --admin_email=admin@example.com;
 ${generateWpConfig(wpConfig)}
+wp plugin list
 ${generatePluginInstall(installPlugins)}
 ${generatePluginActivation(activatePlugins)}
 `;

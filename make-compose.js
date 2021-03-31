@@ -43,7 +43,7 @@ const generateConfig = () => {
       },
       db: {
         container_name: `${config.CONTAINER_NAME_PREFIX}_db`,
-        image: "mysql:5.7.29",
+        image: "mysql:5.7.33",
         restart: "always",
         ports: ["3306:3306"],
         environment: {
@@ -60,6 +60,10 @@ const generateConfig = () => {
         image: "wordpress_installer:latest",
         environment: {
           WP_HOST_NAME: `${config.WP_HOST_NAME}:${config.WP_PORT}`,
+          WORDPRESS_DB_HOST: "db",
+          WORDPRESS_DB_USER: "root",
+          WORDPRESS_DB_PASSWORD: "root",
+          WORDPRESS_DB_NAME: "wp_db",
         },
         user: "xfs",
         command: `/usr/local/bin/${INSTALL_SCRIPT_FILENAME}`,

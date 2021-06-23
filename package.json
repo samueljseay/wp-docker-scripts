@@ -6,7 +6,8 @@
   "scripts": {
     "enter": "node ./enter-container.js",
     "reset": "./bin/reset.sh && ./bin/purge.sh && ./bin/start.sh",
-    "start": "./bin/start.sh"
+    "start": "./bin/start.sh",
+    "wp": "docker-compose -f dynamic-compose.yml exec -u www-data wordpress wp"
   },
   "repository": {
     "type": "git",

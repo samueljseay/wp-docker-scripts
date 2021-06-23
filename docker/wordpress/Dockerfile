@@ -12,10 +12,14 @@ RUN set -ex; \
   chmod +x wp-cli.phar; \
   mv wp-cli.phar /usr/local/bin/wp;
 
+# Install PHP extensions deps
+RUN apt-get update \
+    && apt-get install --no-install-recommends -y \
+        vim less
+
 # uncomment the lines below and run `bin/reset.sh && bin/start.sh` to rebuild with xdebug support
 # RUN pecl install xdebug \
-#   && echo 'xdebug.remote_enable=1' >> $PHP_INI_DIR/php.ini \
-#   && echo 'xdebug.remote_port=9000' >> $PHP_INI_DIR/php.ini \
-#   && echo 'xdebug.remote_host=host.docker.internal' >> $PHP_INI_DIR/php.ini \
-#   && echo 'xdebug.remote_autostart=1' >> $PHP_INI_DIR/php.ini \
-#   && docker-php-ext-enable d xdebug
+#   && docker-php-ext-enable xdebug \
+#   && echo 'xdebug.mode=debug' >> $PHP_INI_DIR/php.ini \
+#   && echo 'xdebug.client_port=9003' >> $PHP_INI_DIR/php.ini \
+#   && echo 'xdebug.client_host=host.docker.internal' >> $PHP_INI_DIR/php.ini

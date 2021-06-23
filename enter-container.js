@@ -8,7 +8,7 @@ const containerQueryCommand = `docker ps -aqf "name=${containerName}"`;
 exec(containerQueryCommand, function (error, containerId, stderr) {
   const shell = spawn(
     "docker",
-    ["exec", "-u www-data", "-it", `${containerId.trim()}`, "/bin/bash"],
+    ["exec", "-u", "www-data", "-it", `${containerId.trim()}`, "/bin/bash"],
     {
       stdio: "inherit",
     }

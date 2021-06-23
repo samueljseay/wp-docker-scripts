@@ -3,10 +3,17 @@ const generateInstallScript = ({
   installPlugins,
   activatePlugins,
 }) => {
+  const adminEmail = wpConfig.email || 'admin@example.com';
+  let url = "$WP_HOST_NAME";
+  if (wpConfig.WP_PORT !== 80) {
+    url += ":$WP_PORT";
+  }
   return `
+#!/usr/bin/env bash
+
 # wait for the wordpress and db containers to run  
 sleep 20;
-wp core install --path="/var/www/html" --url="$WP_HOST_NAME:$WP_PORT" --title="WooCommerce Dev" --admin_user=admin --admin_password=password --admin_email=admin@example.com;
+wp core install --path="/var/www/html" --url="${url}" --title="WooCommerce Dev" --admin_user=admin --admin_password=password --admin_email=${adminEmail};
 ${generateWpConfig(wpConfig)}
 wp plugin list
 ${generatePluginInstall(installPlugins)}

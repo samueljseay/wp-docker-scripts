@@ -2,6 +2,7 @@ module.exports = {
   mappings: {
     "wp-content/plugins/woocommerce-admin": "/local/path/to/woocommerce-admin",
   },
+  multiSite: false,
   installPlugins: ["woocommerce"],
   activatePlugins: ["woocommerce", "woocommerce-admin", "wc-smooth-generator"],
   CONTAINER_NAME_PREFIX: "wp_dev",

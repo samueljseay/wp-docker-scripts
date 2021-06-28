@@ -6,6 +6,12 @@ const INSTALL_SCRIPT_FILENAME = "wp-install-dynamic.sh";
 
 const generateConfig = () => {
   const config = getConfig();
+  const wordpressEnvironment =  {
+          WORDPRESS_DB_HOST: "db",
+          WORDPRESS_DB_USER: "root",
+          WORDPRESS_DB_PASSWORD: "root",
+          WORDPRESS_DB_NAME: "wp_db",
+  };
 
   const mappings = config.mappings
     ? Object.entries(config.mappings).map(([target, source]) => {
@@ -17,6 +23,34 @@ const generateConfig = () => {
       })
     : [];
 
+  if (config.multiSite) {
+    if (config.WP_PORT !== 80) {
+      console.error(`Multisite requires port 80, WP_PORT is set to ${config.WP_PORT}.`);
+      process.exit(1);
+    }
+    const domain = config.WP_HOST_NAME.replace('http://', '');
+    wordpressEnvironment['WORDPRESS_CONFIG_EXTRA'] = `
+        /* Multisite */
+        define('WP_ALLOW_MULTISITE', true );
+        define('MULTISITE', true);
+        define('SUBDOMAIN_INSTALL', false);
+        define('DOMAIN_CURRENT_SITE', '${domain}');
+        define('PATH_CURRENT_SITE', '/');
+        define('SITE_ID_CURRENT_SITE', 1);
+        define('BLOG_ID_CURRENT_SITE', 1);
+    `;
+    mappings.push({
+     type: "bind",
+     source: __dirname + '/docker/wordpress/multisite.htaccess',
+     target: `/var/www/html/.htaccess`, 
+    })
+  }
+
+  let wpHostName = config.WP_HOST_NAME;
+  if (config.WP_PORT !== 80) {
+     wpHostName += `:${config.WP_PORT}`;
+  }
+
   return {
     version: "3.8",
     services: {
@@ -26,10 +60,7 @@ const generateConfig = () => {
         restart: "always",
         ports: [`${config.WP_PORT}:80`],
         environment: {
-          WORDPRESS_DB_HOST: "db",
-          WORDPRESS_DB_USER: "root",
-          WORDPRESS_DB_PASSWORD: "root",
-          WORDPRESS_DB_NAME: "wp_db",
+          ...wordpressEnvironment
         },
         volumes: [
           ...mappings,
@@ -59,7 +90,7 @@ const generateConfig = () => {
         depends_on: ["db", "wordpress"],
         image: "wordpress_installer:latest",
         environment: {
-          WP_HOST_NAME: `${config.WP_HOST_NAME}:${config.WP_PORT}`,
+          WP_HOST_NAME: wpHostName,
           WORDPRESS_DB_HOST: "db",
           WORDPRESS_DB_USER: "root",
           WORDPRESS_DB_PASSWORD: "root",
@@ -67,7 +98,14 @@ const generateConfig = () => {
         },
         user: "xfs",
         command: `/usr/local/bin/${INSTALL_SCRIPT_FILENAME}`,
-        volumes: ["wp_data:/var/www/html"],
+        volumes: [
+          ...mappings,
+          {
+            type: "volume",
+            source: "wp_data",
+            target: "/var/www/html",
+          },
+        ]
       },
     },
     volumes: {

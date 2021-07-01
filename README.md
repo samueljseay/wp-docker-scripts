@@ -26,10 +26,10 @@ To enter the container run `npm run enter`.
 
 ### config.js setup
 
-The config `mappings` is very similar to the `mappings` in @wordpress/env. It allows you to have multiple
-local directories as `bind` volumes in the dynamically generated docker compose file. See the file for examples.
+The config `mappings` is very similar to the `mappings` in @wordpress/env. It allows you to have multiple local directories as `bind` volumes in the dynamically generated docker compose file. See the file for examples.
 
-TODO - more documentation here.
+By default the repository comes with a `config.example.js`. create a copy of this file without the `example`. Its not recommended to push changes to this file because it will often
+contain listings of directories on your host machine.
 
 ### Hard Reset
 

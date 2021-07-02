@@ -5,18 +5,21 @@ const generateInstallScript = ({
   installPlugins,
   activatePlugins,
 }) => {
-  const adminEmail = email || 'admin@example.com';
+  const adminEmail = email || "admin@example.com";
   let url = "$WP_HOST_NAME";
   if (wpConfig.WP_PORT !== 80) {
     url += ":$WP_PORT";
   }
-  const installMethod = multiSite ? 'multisite-install' : 'install';
+  const installMethod = multiSite ? "multisite-install" : "install";
   return `
 #!/usr/bin/env bash
 
-# wait for the wordpress and db containers to run  
-sleep 10;
-wp core is-installed || wp core ${installMethod} --path="/var/www/html" --url="${url}" --title="WooCommerce Dev" --admin_user=admin --admin_password=password --admin_email=${adminEmail};
+until wp core is-installed
+do
+  wp core ${installMethod} --path="/var/www/html" --url="${url}" --title="WooCommerce Dev" --admin_user=admin --admin_password=password --admin_email=${adminEmail};
+  sleep 5  
+done
+
 ${generateWpConfig(wpConfig)}
 wp plugin list
 ${generatePluginInstall(installPlugins)}

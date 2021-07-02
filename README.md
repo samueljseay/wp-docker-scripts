@@ -72,17 +72,8 @@ If you use the VSCode PHP Debug extension here is a config that works with the d
 
 An npm script allows you to get access to the main Wordpress instance container. run `npm run enter`.
 
-### Limitations
-
-1. For some reason, wp cli not see plugins that have been bind mounted into wp-content/plugins, so activation of local
-   plugins does not work right now.
-
-2. wp-cli must be run with `--allow-root` when inside the container right now. I'm exploring some solutions to this.
-
 ### Why not just use @wordpress/env
 
-I encourage you to use @wordpress/env if it suits your needs. It is designed as a low customisation solution
-though.
+I encourage you to use @wordpress/env if it suits your needs. It is designed as a low customisation solution though.
 
-I admit this project is very immature currently, but, it solves my problems by allowing me to manually
-tweak things like the Dockerfiles and solve problems like enabling Xdebug without much hassle.
+I admit this project is very immature currently, but, it solves my problems by allowing me to manually tweak things like the Dockerfiles and solve problems like enabling Xdebug without much hassle.

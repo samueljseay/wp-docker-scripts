@@ -74,7 +74,8 @@ const generateConfig = () => {
       },
       db: {
         container_name: `${config.CONTAINER_NAME_PREFIX}_db`,
-        image: "mysql:5.7.33",
+        image: "mysql:8.0",
+        platform: "linux/amd64",
         restart: "always",
         ports: ["3306:3306"],
         environment: {

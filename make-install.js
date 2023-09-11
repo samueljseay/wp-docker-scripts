@@ -51,7 +51,7 @@ const generatePluginInstall = (installPlugins) => {
     .map((pluginString) => {
       if (pluginString.includes("@")) {
         const [plugin, version] = pluginString.split("@");
-        return `wp plugin install ${plugin} --version ${version}`;
+        return `wp plugin install ${plugin} --version=${version}`;
       }
       return `wp plugin install ${pluginString}`;
     })

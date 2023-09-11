@@ -49,6 +49,10 @@ const generateValueToWrite = (value) => {
 const generatePluginInstall = (installPlugins) => {
   return installPlugins
     .map((plugin) => {
+      if (plugin.includes("@")) {
+        const [plugin, version] = plugin.split("@");
+        return `wp plugin install ${plugin} --version ${version}`;
+      }
       return `wp plugin install ${plugin}`;
     })
     .join("\n");

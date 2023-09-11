@@ -48,8 +48,12 @@ const generateValueToWrite = (value) => {
 
 const generatePluginInstall = (installPlugins) => {
   return installPlugins
-    .map((plugin) => {
-      return `wp plugin install ${plugin}`;
+    .map((pluginString) => {
+      if (pluginString.includes("@")) {
+        const [plugin, version] = pluginString.split("@");
+        return `wp plugin install ${plugin} --version=${version}`;
+      }
+      return `wp plugin install ${pluginString}`;
     })
     .join("\n");
 };

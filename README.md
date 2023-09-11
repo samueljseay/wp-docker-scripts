@@ -19,6 +19,19 @@ If you used the defaults you should now have a wordpress install available at `h
 If you would like to connect to the DB it is exposed on port 3306, so you can
 connect to it as normal with your DB management tool of choice.
 
+
+### Installing plugins by version
+
+If you add a plugin with a version number separated by an @ sign, you can install plugins at specific versions.
+
+E.g. to install Gutenberg at 16.5.0:
+
+```
+installPlugins: ["gutenberg@16.5.0" ],
+```
+
+Please note that there is no version validation currently. If the version does not exist then WP CLI will fail during setup, check the error logs to debug.
+
 ### Enter the container
 
 If you want run commands inside the container you'll find it has wp-cli available.
@@ -74,6 +87,4 @@ An npm script allows you to get access to the main Wordpress instance container.
 
 ### Why not just use @wordpress/env
 
-I encourage you to use @wordpress/env if it suits your needs. It is designed as a low customisation solution though.
-
-I admit this project is very immature currently, but, it solves my problems by allowing me to manually tweak things like the Dockerfiles and solve problems like enabling Xdebug without much hassle.
+I encourage you to use @wordpress/env if it suits your needs. It is designed as a low customisation solution though, so if you need to tinker this may be useful to you.

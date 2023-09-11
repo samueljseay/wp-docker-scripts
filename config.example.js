@@ -3,7 +3,7 @@ module.exports = {
     "wp-content/plugins/woocommerce-admin": "/local/path/to/woocommerce-admin",
   },
   multiSite: false,
-  installPlugins: ["woocommerce"],
+  installPlugins: ["woocommerce", "gutenberg@16.5.0" ],
   activatePlugins: ["woocommerce", "woocommerce-admin", "wc-smooth-generator"],
   CONTAINER_NAME_PREFIX: "wp_dev",
   WP_HOST_NAME: "http://docker.for.mac.localhost",

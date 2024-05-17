@@ -26,4 +26,11 @@ module.exports = {
       raw: true,
     },
   },
+  // Useful for supporting ngrok.
+  WP_CONFIG_EXTRA: `
+$_SERVER['HTTPS'] = isset($_SERVER['HTTP_X_FORWARDED_PROTO']) && $_SERVER['HTTP_X_FORWARDED_PROTO'] === 'https' ? 'on' : NULL;
+define('DOCKER_REQUEST_URL', (!empty($_SERVER['HTTPS']) ? 'https://' : 'http://') . (!empty($_SERVER['HTTP_HOST']) ? $_SERVER['HTTP_HOST'] : 'localhost'));
+define('WP_SITEURL', DOCKER_REQUEST_URL);
+define('WP_HOME', DOCKER_REQUEST_URL);
+  `
 };

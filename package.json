@@ -20,6 +20,6 @@
   },
   "homepage": "https://github.com/samueljseay/wp-docker-scripts#readme",
   "dependencies": {
-    "js-yaml": "^3.14.0"
+    "js-yaml": "^4.1.1"
   }
 }
